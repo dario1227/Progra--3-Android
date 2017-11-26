@@ -1,6 +1,5 @@
 # Built application files
 *.apk
-*.ap_
 
 # Files for the ART/Dalvik VM
 *.dex
@@ -69,9 +68,10 @@ freeline_project_description.json
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 
+#Sonarlint
+.idea/sonarlint
+
 # Gradle:
-.idea/**/gradle.xml
-.idea/**/libraries
 
 # CMake
 cmake-build-debug/
