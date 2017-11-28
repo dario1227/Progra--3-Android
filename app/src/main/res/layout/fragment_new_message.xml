@@ -1,0 +1,120 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="datos1.tec.org.packettec.fragments.NewMessageFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#FFF"
+            android:elevation="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/contactText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/raleway_extrabold"
+                    android:text="New Message"
+                    android:textAlignment="center"
+                    android:textColor="@color/font_title"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.427"
+                    app:layout_constraintStart_toEndOf="@+id/menuBtn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/menuBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFF"
+                    android:src="@drawable/menubutton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/searchText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/transparent"
+                    android:ems="10"
+                    android:fontFamily="@font/raleway"
+                    android:hint="Name"
+                    android:inputType="textPersonName"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/clearBtn"
+                    app:layout_constraintHorizontal_bias="0.651"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/contactText" />
+
+                <ImageButton
+                    android:id="@+id/clearBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="#FFF"
+                    android:src="@drawable/clear_btn"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="232dp"
+            android:layout_height="85dp"
+            android:layout_marginBottom="50dp"
+            android:fontFamily="@font/raleway_extrabold"
+            android:text="Alguna Manera de montar esto ^^^^^"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/screenshott"
+            app:layout_constraintBottom_toTopOf="@+id/textView6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            app:layout_constraintVertical_bias="0.512" />
+
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>
+

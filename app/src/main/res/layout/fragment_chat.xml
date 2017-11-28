@@ -1,0 +1,156 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="datos1.tec.org.packettec.fragments.ChatFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#FFF"
+            android:elevation="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/contactText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="4dp"
+                    android:drawableLeft="@drawable/online"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/raleway_semibold"
+                    android:text="Contact Name"
+                    android:textAlignment="center"
+                    android:textColor="@color/font_title"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/search_chatBtn"
+                    app:layout_constraintHorizontal_bias="0.629"
+                    app:layout_constraintStart_toEndOf="@+id/backBtn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/create_chatBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="4dp"
+                    android:background="#FFF"
+                    android:src="@drawable/moreinfo_btn"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/search_chatBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="4dp"
+                    android:background="#FFF"
+                    android:src="@drawable/searchbutton"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/create_chatBtn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/backBtn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    android:background="#FFF"
+                    android:src="@drawable/back_btn"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/screnshottt" />
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#FFF"
+            android:elevation="20dp"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageButton
+                android:id="@+id/emojiBtn"
+                android:layout_width="3dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="#FFF"
+                android:src="@drawable/emoji" />
+
+            <EditText
+                android:id="@+id/MessageText"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:ems="10"
+                android:fontFamily="@font/raleway"
+                android:hint="Type something..."
+                android:inputType="textPersonName" />
+
+            <ImageButton
+                android:id="@+id/attachBtn"
+                android:layout_width="3dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="#FFF"
+                android:src="@drawable/attachment" />
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>
+
+
