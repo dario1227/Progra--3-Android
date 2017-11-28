@@ -15,7 +15,7 @@ import datos1.tec.org.packettec.fragments.MainFragment;
 import datos1.tec.org.packettec.fragments.NewMessageFragment;
 import datos1.tec.org.packettec.fragments.SearchFragment;
 
-public class MainActivity extends AppCompatActivity implements LoginFragment.LoginFragmentInteractionListener, MainFragment.OnFragmentInteractionListener, NewMessageFragment.OnFragmentInteractionListener, SearchFragment.OnFragmentInteractionListener, ChatFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements OnClickListener,LoginFragment.LoginFragmentInteractionListener, MainFragment.OnFragmentInteractionListener, NewMessageFragment.OnFragmentInteractionListener, SearchFragment.OnFragmentInteractionListener, ChatFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
 
         FragmentManager manager = getSupportFragmentManager();
         Fragment fragment = manager.findFragmentById(R.id.fragment_container);
-
+        MainActivity.setOnClickListener(this);
         if (fragment == null) {
             fragment = new LoginFragment();
             FragmentTransaction transaction = manager.beginTransaction();
@@ -32,6 +32,53 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
             transaction.commit();
         }
 
+    }
+    @Override
+    Public void OnClick{
+        new Thread(new Runnable() {
+            public void run() {
+
+                try{
+                    URL url = new URL("URL!!!!!!!!!!!");
+                    URLConnection connection = url.openConnection();
+
+                    String inputString = inputValue.getText().toString();
+                    //inputString = URLEncoder.encode(inputString, "UTF-8");
+
+                    Log.d("inputString", inputString);
+
+                    connection.setDoOutput(true);
+                    OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
+                    out.write(inputString);
+                    out.close();
+
+                    BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+                    String returnString="";
+                    doubledValue =0;
+
+                    while ((returnString = in.readLine()) != null)
+                    {
+                        doubledValue= Integer.parseInt(returnString);
+                    }
+                    in.close();
+
+
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+
+                            inputValue.setText(doubledValue.toString());
+
+                        }
+                    });
+
+                }catch(Exception e)
+                {
+                    Log.d("Exception",e.toString());
+                }
+
+            }
+        }).start();
     }
 
     public void loadMainFragment() {
