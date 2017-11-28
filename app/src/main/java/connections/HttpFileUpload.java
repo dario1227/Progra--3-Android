@@ -106,7 +106,7 @@ public class HttpFileUpload extends Activity {
             dos.writeBytes(lineEnd);
             dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
 
-            // close streams
+
             fileInputStream.close();
 
             dos.flush();
@@ -115,7 +115,7 @@ public class HttpFileUpload extends Activity {
 
             InputStream is = conn.getInputStream();
 
-            // retrieve the response from server
+
             int ch;
 
             StringBuffer b = new StringBuffer();
