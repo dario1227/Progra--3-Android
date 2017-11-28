@@ -23,6 +23,13 @@ public class HttpFileUpload extends Activity {
     byte[] dataToServer;
     FileInputStream fileInputStream = null;
 
+    /**
+     * Se define un objeto para posteriormente subir el archivo
+     * @param urlString el url al que se sube el archivo
+     * @param vTitle
+     * @param vDesc
+     * @param filename nombre del archivo
+     */
     HttpFileUpload(String urlString, String vTitle, String vDesc,String filename) {
         try {
             this.filename = filename;
