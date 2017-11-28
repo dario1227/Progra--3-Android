@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PacketTEC.iml" filepath="$PROJECT_DIR$/PacketTEC.iml" />
+      <module fileurl="file://C:\Users\Marco Herrera\StudioProjects\Progra-3-Android\PacketTEC.iml" filepath="C:\Users\Marco Herrera\StudioProjects\Progra-3-Android\PacketTEC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Progra-3-Android.iml" filepath="$PROJECT_DIR$/Progra-3-Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
