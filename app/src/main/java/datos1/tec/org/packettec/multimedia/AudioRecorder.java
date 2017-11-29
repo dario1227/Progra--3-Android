@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import java.io.IOException;
+import android.support.v7.widget.AppCompatButton;
 public class AudioRecorder extends AppCompatActivity{
 	    private static final String LOG_TAG = "AudioRecordTest";
 	    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
@@ -94,7 +95,7 @@ public class AudioRecorder extends AppCompatActivity{
 	        mRecorder.release();
 	        mRecorder = null;
 	    }
-//Aqui es el boton de grabar 
+//Aqui es el boton de grabar
 	    class RecordButton extends Button {
 	        boolean mStartRecording = true;
 
