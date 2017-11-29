@@ -23,6 +23,13 @@ public class HttpFileUpload extends Activity {
     byte[] dataToServer;
     FileInputStream fileInputStream = null;
 
+    /**
+     * Se define un objeto para posteriormente subir el archivo
+     * @param urlString el url al que se sube el archivo
+     * @param vTitle
+     * @param vDesc
+     * @param filename nombre del archivo
+     */
     HttpFileUpload(String urlString, String vTitle, String vDesc,String filename) {
         try {
             this.filename = filename;
@@ -106,7 +113,7 @@ public class HttpFileUpload extends Activity {
             dos.writeBytes(lineEnd);
             dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
 
-            // close streams
+
             fileInputStream.close();
 
             dos.flush();
@@ -115,7 +122,7 @@ public class HttpFileUpload extends Activity {
 
             InputStream is = conn.getInputStream();
 
-            // retrieve the response from server
+
             int ch;
 
             StringBuffer b = new StringBuffer();
