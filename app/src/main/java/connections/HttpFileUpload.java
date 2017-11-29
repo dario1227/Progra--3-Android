@@ -5,7 +5,18 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import android.app.Activity;
 import android.util.Log;
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.InputStreamBody;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.util.EntityUtils;
 import java.io.*;
 import android.os.Environment;
 
@@ -15,148 +26,45 @@ import android.os.Environment;
 
 public class HttpFileUpload extends Activity {
 
-    URL connectURL;
-    String responseString;
-    String Title;
-    String Description;
-    String filename;
-    byte[] dataToServer;
-    FileInputStream fileInputStream = null;
 
-    /**
-     * Se define un objeto para posteriormente subir el archivo
-     * @param urlString el url al que se sube el archivo
-     * @param vTitle
-     * @param vDesc
-     * @param filename nombre del archivo
-     */
-    HttpFileUpload(String urlString, String vTitle, String vDesc,String filename) {
+    @SuppressWarnings("deprecation")
+    public static void upload(String file) {
+
+        // the file we want to upload
+        File inFile = new File(file);
+        FileInputStream fis = null;
         try {
-            this.filename = filename;
-            connectURL = new URL(urlString);
-            Title = vTitle;
-            Description = vDesc;
-        } catch (Exception ex) {
-            Log.i("HttpFileUpload", "URL Malformatted");
+            fis = new FileInputStream(inFile);
+
+            DefaultHttpClient httpclient = new DefaultHttpClient(new BasicHttpParams());
+
+            // server back-end URL
+            HttpPost httppost = new HttpPost("http://localhost:9080/webapi/services/messages/files/upload");
+            MultipartEntity entity = new MultipartEntity();
+            // set the file input stream and file name as arguments
+            entity.addPart("file", new InputStreamBody(fis, inFile.getName()));
+            httppost.setEntity(entity);
+            // execute the request
+            HttpResponse response = httpclient.execute(httppost);
+
+            int statusCode = response.getStatusLine().getStatusCode();
+            HttpEntity responseEntity = response.getEntity();
+            String responseString = EntityUtils.toString(responseEntity, "UTF-8");
+
+            System.out.println("[" + statusCode + "] " + responseString);
+
+        } catch (ClientProtocolException e) {
+            System.err.println("Unable to make connection");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("Unable to read file");
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fis != null) fis.close();
+            } catch (IOException e) {}
         }
     }
 
-    void Send_Now(FileInputStream fStream) {
-        fileInputStream = fStream;
-        Sending();
-    }
 
-    void Sending() {
-        String iFileName = filename;
-        String lineEnd = "\r\n";
-        String twoHyphens = "--";
-        String boundary = "*****";
-        String Tag = "fSnd";
-        try {
-            Log.e(Tag, "Starting Http File Sending to URL");
-
-            // Open a HTTP connection to the URL
-            HttpURLConnection conn = (HttpURLConnection) connectURL.openConnection();
-
-            // Allow Inputs
-            conn.setDoInput(true);
-
-            // Allow Outputs
-            conn.setDoOutput(true);
-
-            // Don't use a cached copy.
-            conn.setUseCaches(false);
-
-            // Use a post method.
-            conn.setRequestMethod("POST");
-
-            conn.setRequestProperty("Connection", "Keep-Alive");
-
-            conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
-
-            DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
-
-            dos.writeBytes(twoHyphens + boundary + lineEnd);
-            dos.writeBytes("Content-Disposition: form-data; name=\"title\"" + lineEnd);
-            dos.writeBytes(lineEnd);
-            dos.writeBytes(Title);
-            dos.writeBytes(lineEnd);
-            dos.writeBytes(twoHyphens + boundary + lineEnd);
-
-            dos.writeBytes("Content-Disposition: form-data; name=\"description\"" + lineEnd);
-            dos.writeBytes(lineEnd);
-            dos.writeBytes(Description);
-            dos.writeBytes(lineEnd);
-            dos.writeBytes(twoHyphens + boundary + lineEnd);
-
-            dos.writeBytes("Content-Disposition: form-data; name=\"uploadedfile\";filename=\"" + iFileName + "\"" + lineEnd);
-            dos.writeBytes(lineEnd);
-
-            Log.e(Tag, "Headers are written");
-
-            // create a buffer of maximum size
-            int bytesAvailable = fileInputStream.available();
-
-            int maxBufferSize = 1024;
-            int bufferSize = Math.min(bytesAvailable, maxBufferSize);
-            byte[] buffer = new byte[bufferSize];
-
-            // read file and write it into form...
-            int bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-
-            while (bytesRead > 0) {
-                dos.write(buffer, 0, bufferSize);
-                bytesAvailable = fileInputStream.available();
-                bufferSize = Math.min(bytesAvailable, maxBufferSize);
-                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-            }
-            dos.writeBytes(lineEnd);
-            dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
-
-
-            fileInputStream.close();
-
-            dos.flush();
-
-            Log.e(Tag, "File Sent, Response: " + String.valueOf(conn.getResponseCode()));
-
-            InputStream is = conn.getInputStream();
-
-
-            int ch;
-
-            StringBuffer b = new StringBuffer();
-            while ((ch = is.read()) != -1) {
-                b.append((char) ch);
-            }
-            String s = b.toString();
-            Log.i("Response", s);
-            dos.close();
-        } catch (Exception ex) {
-            Log.e(Tag, "URL error: " + ex.getMessage(), ex);
-        }
-
-
-    }
-
-
-    public void run() {
-        // TODO Auto-generated method stub
-    }
-
-
-    public void UploadFile() {
-        try {
-            // Set your file path here
-            FileInputStream fstrm = new FileInputStream(Environment.getExternalStorageDirectory().toString() + "/DCIM/file.mp4");
-
-            // Set your server page url (and the file title/description)
-            HttpFileUpload hfu = new HttpFileUpload("http://localhost:9080/webapi/services/messages/files/upload", "my file title", "my file description",filename);
-
-            hfu.Send_Now(fstrm);
-
-        } catch (FileNotFoundException e) {
-            // Error: File not found
-        }
-    }
 }
