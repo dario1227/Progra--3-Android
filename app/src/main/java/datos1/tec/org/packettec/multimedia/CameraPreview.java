@@ -1,46 +1,48 @@
 package datos1.tec.org.packettec.multimedia;
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.TextureView;
 
-public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
-	private SurfaceHolder mHolder;
-	private Camera mCamera;
+public class CameraPreview extends TextureView {
 
-	    public CameraPreview(Context context, Camera camera) {
-	        super(context);
-	        mCamera = camera;
+	private int mRatioWidth = 0;
+	private int mRatioHeight = 0;
 
-	        mHolder = getHolder();
-	        mHolder.addCallback(this);
-	        mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-	    }
+	public CameraPreview(Context context) {
+		this(context, null);
+	}
 
-	    public void surfaceCreated(SurfaceHolder holder) {
-	        try {
-	            mCamera.setPreviewDisplay(holder);
-	            mCamera.startPreview();
-	        } catch (IOException e) {
-	            Log.d(TAG, "Error setting camera preview: " + e.getMessage());
-	        }
-	    }
+	public CameraPreview(Context context, AttributeSet attrs) {
+		this(context, attrs, 0);
+	}
 
-	    public void surfaceDestroyed(SurfaceHolder holder) {
-	    }
+	public CameraPreview(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+	}
 
-	    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-	        if (mHolder.getSurface() == null){
-	          return;
-	        }
+	public void setAspectRatio(int width, int height) {
+		if (width < 0 || height < 0) {
+			throw new IllegalArgumentException("Size cannot be negative.");
+		}
+		mRatioWidth = width;
+		mRatioHeight = height;
+		requestLayout();
+	}
 
-	        try {
-	            mCamera.stopPreview();
-	        } catch (Exception e){
-	        }
-	        try {
-	            mCamera.setPreviewDisplay(mHolder);
-	            mCamera.startPreview();
-
-	        } catch (Exception e){
-	            Log.d(TAG, "Error starting camera preview: " + e.getMessage());
-	        }
-	    }
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+		int width = MeasureSpec.getSize(widthMeasureSpec);
+		int height = MeasureSpec.getSize(heightMeasureSpec);
+		if (0 == mRatioWidth || 0 == mRatioHeight) {
+			setMeasuredDimension(width, height);
+		} else {
+			if (width < height * mRatioWidth / mRatioHeight) {
+				setMeasuredDimension(width, width * mRatioHeight / mRatioWidth);
+			} else {
+				setMeasuredDimension(height * mRatioWidth / mRatioHeight, height);
+			}
+		}
+	}
 
 }

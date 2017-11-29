@@ -1,20 +1,20 @@
 package datos1.tec.org.packettec.multimedia;
-public class CameraActivity extends Activity {
-//Actividad de la camara
-	    private Camera mCamera;
-	    private CameraPreview mPreview;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import datos1.tec.org.packettec.R;
 
-	    @Override
-	    public void onCreate(Bundle savedInstanceState) {
-	        super.onCreate(savedInstanceState);
-	        setContentView(R.layout.main);
+	public class CameraActivity extends AppCompatActivity {
 
-	        // Create an instance of Camera
-	        mCamera = getCameraInstance();
+		@Override
+		protected void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			setContentView(R.layout.activity_main);
+			if (null == savedInstanceState) {
+				getSupportFragmentManager().beginTransaction()
+						.replace(R.id.container, Camera.newInstance())
+						.commit();
+			}
+		}
 
-	        // Create our Preview view and set it as the content of our activity.
-	        mPreview = new CameraPreview(this, mCamera);
-	        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-	        preview.addView(mPreview);
-	    }
+	}
 }
