@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
 
         FragmentManager manager = getSupportFragmentManager();
         Fragment fragment = manager.findFragmentById(R.id.fragment_container);
-        MainActivity.setOnClickListener(this);
         if (fragment == null) {
             fragment = new LoginFragment();
             FragmentTransaction transaction = manager.beginTransaction();
