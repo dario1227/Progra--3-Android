@@ -13,7 +13,7 @@ import java.net.URL;
 
 public class HttpRequest {
 
-    public static void get(String query) {
+    public static String get(String query) {
         try {
 
             URL url = new URL(query);
@@ -28,9 +28,10 @@ public class HttpRequest {
                 response.append(inputLine);
             }
             in.close();
-            System.out.println(response.toString());
             client.disconnect();
+            return response.toString();
         } catch (IOException exception) {
+            return null;
         }
     }
     public static void post(String query,String json) {
