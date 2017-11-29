@@ -1,12 +1,14 @@
 package datos1.tec.org.packettec.multimedia;
-
+import android.hardware.Camera;
+import java.io.File;
+import android.provider.MediaStore.Files.FileColumns
 public class CameraTakePicture {
-	private PictureCallback mPicture = new PictureCallback() {
+	private Camera.PictureCallback mPicture = new Camera.PictureCallback() {
 
 	    @Override
 	    public void onPictureTaken(byte[] data, Camera camera) {
 
-	        File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
+	        File pictureFile = getOutputMediaFile("imagen.png");
 	        if (pictureFile == null){
 	            Log.d(TAG, "Error creating media file, check storage permissions: " +
 	                e.getMessage());

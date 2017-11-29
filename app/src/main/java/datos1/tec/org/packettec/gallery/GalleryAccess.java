@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import datos1.tec.org.packettec.R;
+
 
 public class GalleryAccess extends Activity{
 	TextView textTargetUri;
@@ -20,10 +22,10 @@ public class GalleryAccess extends Activity{
      @Override
      public void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
-         setContentView(R.layout.main);
-         Button buttonLoadImage = (Button)findViewById(R.id.loadimage);
-         textTargetUri = (TextView)findViewById(R.id.targeturi);
-         targetImage = (ImageView)findViewById(R.id.targetimage);
+         setContentView(R.layout.activity_main);
+         Button buttonLoadImage = (Button)findViewById(R.id.center_horizontal);
+         textTargetUri = (TextView)findViewById(R.id.textView);
+         targetImage = (ImageView)findViewById(R.id.imageView);
 
          buttonLoadImage.setOnClickListener(new Button.OnClickListener(){
 
