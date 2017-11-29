@@ -20,4 +20,5 @@
     <string name="msg">MSG</string>
     <string name="nothing_here_yet">Nothing here yet!</string>
     <string name="here_is_what_to_do_now">Here is what to do now.</string>
+    <string name="hello">Cargar Imagen</string>
 </resources>
