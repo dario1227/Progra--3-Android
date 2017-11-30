@@ -2,12 +2,11 @@ package datos1.tec.org.packettec.activities;
 
 
 import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.Fragment;
-import android.view.View;
 
 import datos1.tec.org.packettec.R;
 import datos1.tec.org.packettec.fragments.ChatFragment;

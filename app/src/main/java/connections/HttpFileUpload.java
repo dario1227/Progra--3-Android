@@ -1,13 +1,7 @@
 package connections;
-import java.io.DataOutputStream;
-import java.io.FileInputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
 import android.app.Activity;
-import android.util.Log;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -17,8 +11,10 @@ import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.util.EntityUtils;
-import java.io.*;
-import android.os.Environment;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 /**
  * Created by kenne on 11/27/2017.
