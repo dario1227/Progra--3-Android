@@ -1,7 +1,6 @@
 package datos1.tec.org.packettec.fragments;
 
 import android.graphics.Rect;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,23 +9,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import datos1.tec.org.packettec.R;
 import datos1.tec.org.packettec.adapters.ConversationAdapter;
+import datos1.tec.org.packettec.model.Conversations;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ConvoFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ConvoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ConvoFragment extends Fragment {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    RecyclerView recyclerView;
+    ConversationAdapter adapter;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -69,38 +65,46 @@ public class ConvoFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_convo, container, false);
 
-        RecyclerView recyclerView = v.findViewById(R.id.convo_recycler);
+        recyclerView = v.findViewById(R.id.convo_recycler);
         recyclerView.setHasFixedSize(true);
 
-        ConversationAdapter adapter = new ConversationAdapter();
-
         recyclerView.addItemDecoration(new VerticalSpaceItemDecorator(10));
-
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
+        adapter = new ConversationAdapter();
+        populateRecyclerViewValues();
 
         return v;
     }
 
+    private void populateRecyclerViewValues() {
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        ArrayList<Conversations> listContentArr = new ArrayList<>();
+
+
+        for (int iter = 0; iter <= 50; iter++) {
+            //Creating POJO class object
+            Conversations conversations = new Conversations();
+            //Values are binded using set method of the POJO class
+            conversations.setName("Marco Herrera");
+            conversations.setContent("Hello RecyclerView! item: " + iter);
+            conversations.setTime("10:45PM");
+            //After setting the values, we add all the Objects to the array
+            //Hence, listConentArr is a collection of Array of POJO objects
+
+            listContentArr.add(conversations);
+        }
+        //We set the array to the adapter
+        adapter.setListContent(listContentArr);
+        //We in turn set the adapter to the RecyclerView
+        recyclerView.setAdapter(adapter);
     }
+
+
 }
 
 class VerticalSpaceItemDecorator extends RecyclerView.ItemDecoration {
