@@ -9,14 +9,14 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import javax.ws.rs.client.*;
+//import javax.ws.rs.client.*;
 
 
 
 public class HttpFileDownload {
 
     public static  void downloadFromUrl( String localFilename) throws IOException, URISyntaxException {
-        Client client = ClientBuilder.newClient();
+        //Client client = ClientBuilder.newClient();
         String url = "http://localhost:9080/webapi/services/messages/files/download";
         try {
             URL website = new URL(url);

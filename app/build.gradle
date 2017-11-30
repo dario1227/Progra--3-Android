@@ -76,7 +76,7 @@ dependencies {
     implementation files('libs/javax.json-1.1.jar')
     implementation files('libs/javax.json-api-1.1.jar')
     implementation files('libs/javax.servlet-api-3.0.1.jar')
-    implementation files('libs/javax.ws.rs-api-2.1.jar')
+    //  implementation files('libs/javax.ws.rs-api-2.1.jar')
     implementation files('libs/jaxb-api-2.2.7.jar')
     implementation files('libs/jboss-interceptors-api_1.1_spec-1.0.0.Beta1.jar')
     implementation files('libs/jersey-client.jar')
