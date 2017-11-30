@@ -11,17 +11,30 @@ import android.view.View;
 
 import datos1.tec.org.packettec.R;
 import datos1.tec.org.packettec.fragments.ChatFragment;
+import datos1.tec.org.packettec.fragments.ConversationsMainFragment;
 import datos1.tec.org.packettec.fragments.LoginFragment;
 import datos1.tec.org.packettec.fragments.MainFragment;
 import datos1.tec.org.packettec.fragments.NewMessageFragment;
 import datos1.tec.org.packettec.fragments.SearchFragment;
 
-public class MainActivity extends AppCompatActivity implements LoginFragment.LoginFragmentInteractionListener, MainFragment.OnFragmentInteractionListener, NewMessageFragment.OnFragmentInteractionListener, SearchFragment.OnFragmentInteractionListener, ChatFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements LoginFragment.LoginFragmentInteractionListener, MainFragment.OnFragmentInteractionListener, NewMessageFragment.OnFragmentInteractionListener, SearchFragment.OnFragmentInteractionListener, ChatFragment.OnFragmentInteractionListener, ConversationsMainFragment.OnFragmentInteractionListener {
+
+    private static MainActivity mainActivity;
+
+    public static MainActivity getMainActivity() {
+        return mainActivity;
+    }
+
+    private static void setMainActivity(MainActivity mainActivity) {
+        MainActivity.mainActivity = mainActivity;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MainActivity.setMainActivity(this);
 
         FragmentManager manager = getSupportFragmentManager();
         Fragment fragment = manager.findFragmentById(R.id.fragment_container);
@@ -33,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
         }
 
     }
-   
+
 
     public void loadMainFragment() {
 
@@ -60,6 +73,13 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
 
         ChatFragment chatFragment = new ChatFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, chatFragment).addToBackStack(null).commit();
+
+    }
+
+    public void loadConversationsMainFragment() {
+
+        ConversationsMainFragment conversationsMainFragment = new ConversationsMainFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, conversationsMainFragment).addToBackStack(null).commit();
 
     }
 

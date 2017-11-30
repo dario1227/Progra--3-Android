@@ -1,43 +1,40 @@
 package datos1.tec.org.packettec.fragments;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 
 import datos1.tec.org.packettec.R;
-import datos1.tec.org.packettec.activities.MainActivity;
+import datos1.tec.org.packettec.adapters.ConversationAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MainFragment.OnFragmentInteractionListener} interface
+ * {@link ConvoFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MainFragment#newInstance} factory method to
+ * Use the {@link ConvoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainFragment extends Fragment {
-
+public class ConvoFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private ImageButton menuBtn;
-    private ImageButton searchBtn;
-    private ImageButton create_chatBtn;
-    private Button send_messageBtn;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    public MainFragment() {
+    public ConvoFragment() {
         // Required empty public constructor
     }
 
@@ -47,11 +44,11 @@ public class MainFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MainFragment.
+     * @return A new instance of fragment ConvoFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MainFragment newInstance(String param1, String param2) {
-        MainFragment fragment = new MainFragment();
+    public static ConvoFragment newInstance(String param1, String param2) {
+        ConvoFragment fragment = new ConvoFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,43 +69,20 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_main, container, false);
-        menuBtn = v.findViewById(R.id.menuBtn);
-        searchBtn = v.findViewById(R.id.searchBtn);
-        create_chatBtn = v.findViewById(R.id.create_chatBtn);
-        send_messageBtn = v.findViewById(R.id.send_messageBtn);
+        View v = inflater.inflate(R.layout.fragment_convo, container, false);
 
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.loadSearchFragment();
-            }
-        });
+        RecyclerView recyclerView = v.findViewById(R.id.convo_recycler);
+        recyclerView.setHasFixedSize(true);
 
-        create_chatBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.loadNewMessageFragment();
-            }
-        });
+        ConversationAdapter adapter = new ConversationAdapter();
 
-        send_messageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.loadChatFragment();
-            }
-        });
+        recyclerView.addItemDecoration(new VerticalSpaceItemDecorator(10));
 
-        menuBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.loadConversationsMainFragment();
-            }
-        });
+        recyclerView.setAdapter(adapter);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
 
 
         return v;
@@ -151,5 +125,20 @@ public class MainFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+}
+
+class VerticalSpaceItemDecorator extends RecyclerView.ItemDecoration {
+
+    private final int spacer;
+
+    public VerticalSpaceItemDecorator(int spacer) {
+        this.spacer = spacer;
+    }
+
+    @Override
+    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+        super.getItemOffsets(outRect, view, parent, state);
+        outRect.bottom = spacer;
     }
 }

@@ -4,40 +4,34 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 
 import datos1.tec.org.packettec.R;
-import datos1.tec.org.packettec.activities.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MainFragment.OnFragmentInteractionListener} interface
+ * {@link ConversationsMainFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MainFragment#newInstance} factory method to
+ * Use the {@link ConversationsMainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MainFragment extends Fragment {
-
+public class ConversationsMainFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private ImageButton menuBtn;
-    private ImageButton searchBtn;
-    private ImageButton create_chatBtn;
-    private Button send_messageBtn;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    public MainFragment() {
+    public ConversationsMainFragment() {
         // Required empty public constructor
     }
 
@@ -47,11 +41,11 @@ public class MainFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MainFragment.
+     * @return A new instance of fragment ConversationsMainFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MainFragment newInstance(String param1, String param2) {
-        MainFragment fragment = new MainFragment();
+    public static ConversationsMainFragment newInstance(String param1, String param2) {
+        ConversationsMainFragment fragment = new ConversationsMainFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -71,44 +65,14 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_conversations_main, container, false);
 
-        View v = inflater.inflate(R.layout.fragment_main, container, false);
-        menuBtn = v.findViewById(R.id.menuBtn);
-        searchBtn = v.findViewById(R.id.searchBtn);
-        create_chatBtn = v.findViewById(R.id.create_chatBtn);
-        send_messageBtn = v.findViewById(R.id.send_messageBtn);
+        FragmentManager fm = getActivity().getSupportFragmentManager();
 
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.loadSearchFragment();
-            }
-        });
+        ConvoFragment convoFragment;
 
-        create_chatBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.loadNewMessageFragment();
-            }
-        });
-
-        send_messageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.loadChatFragment();
-            }
-        });
-
-        menuBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.loadConversationsMainFragment();
-            }
-        });
+        convoFragment = ConvoFragment.newInstance("", "");
+        fm.beginTransaction().add(R.id.container_conversations, convoFragment).commit();
 
 
         return v;
