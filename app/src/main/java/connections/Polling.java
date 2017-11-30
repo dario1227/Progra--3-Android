@@ -3,8 +3,6 @@ package connections;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
-
 import datos1.tec.org.packettec.R;
 
 /**

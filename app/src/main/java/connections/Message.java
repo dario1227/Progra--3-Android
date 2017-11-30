@@ -1,7 +1,6 @@
 package connections;
+
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by kenne on 11/28/2017.
