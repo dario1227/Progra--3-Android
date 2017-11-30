@@ -15,19 +15,19 @@ import java.nio.channels.ReadableByteChannel;
 
 public class HttpFileDownload {
 
-    public static  void downloadFromUrl( String localFilename) throws IOException, URISyntaxException {
-        //Client client = ClientBuilder.newClient();
-        String url = "http://localhost:9080/webapi/services/messages/files/download";
-        try {
-            URL website = new URL(url);
-
-            ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-            FileOutputStream fos = new FileOutputStream("Path del android" + localFilename);
-            fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-
-        } catch ( Exception ex) {
-            ex.printStackTrace();
-        }}
+//    public static  void downloadFromUrl( String localFilename) throws IOException, URISyntaxException {
+//        Client client = ClientBuilder.newClient();
+//        String url = "http://localhost:9080/webapi/services/messages/files/download";
+//        try {
+//            URL website = new URL(url);
+//
+//            ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+//            FileOutputStream fos = new FileOutputStream("Path del android" + localFilename);
+//            fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+//
+//        } catch ( Exception ex) {
+//            ex.printStackTrace();
+//        }}
 
 
     }
