@@ -1,25 +1,25 @@
 package connections;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
+/**
+ * Created by kenne on 11/29/2017.
+ */
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.BufferedReader;
+
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
-
-/**
- * Created by Marco Herrera on 26/11/2017.
- */
-
-public class HttpRequest {
-
-    public static String get(String query) {
+public class LoginAndLogOut {
+    public static void LogIn(String name) {
         try {
-
+            String query = "http://localhost:9080/webapi/services/auth" + "?Name=" + name;
             URL url = new URL(query);
 
             HttpURLConnection client = (HttpURLConnection) url.openConnection();
-            client.setRequestMethod("GET");
+            client.setRequestMethod("POST");
 
             BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
             String inputLine;
@@ -29,26 +29,20 @@ public class HttpRequest {
                 response.append(inputLine);
             }
             in.close();
+            System.out.println(response.toString());
             client.disconnect();
-            return response.toString();
         } catch (IOException exception) {
-            return null;
         }
     }
-    public static void post(String query,String json) {
+    public static void LogOut() {
         try {
+            String query = "http://localhost:9080/webapi/services/auth/logOut";
             URL url = new URL(query);
-            HttpURLConnection client = (HttpURLConnection) url.openConnection();
 
-            client.setDoOutput(true);
-            client.setRequestProperty("Content-Type", "application/json");
+            HttpURLConnection client = (HttpURLConnection) url.openConnection();
             client.setRequestMethod("POST");
 
-            DataOutputStream wr = new DataOutputStream(client.getOutputStream());
-            wr.writeBytes(json);
-
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(client.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
             String inputLine;
             StringBuffer response = new StringBuffer();
 
@@ -56,9 +50,9 @@ public class HttpRequest {
                 response.append(inputLine);
             }
             in.close();
+            System.out.println(response.toString());
             client.disconnect();
-        }catch(Exception e) {}
+        } catch (IOException exception) {
+        }
     }
-
-
 }
