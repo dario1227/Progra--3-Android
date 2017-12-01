@@ -26,9 +26,9 @@ public class LoginAndLogOut implements AsyncResponse{
         } catch (IOException exception) {
         }
     }
-    public void LogOut() {
+    public void LogOut(String address) {
         try {
-            String query = "http://localhost:9080/webapi/services/auth/logOut";
+            String query = address + "auth/logOut";
             URL url = new URL(query);
 
             HttpURLConnection client = (HttpURLConnection) url.openConnection();
@@ -37,7 +37,6 @@ public class LoginAndLogOut implements AsyncResponse{
             HttpConnection connection = new HttpConnection();
             connection.delegate = this;
             connection.execute(client);
-
             client.disconnect();
         } catch (IOException exception) {
         }
@@ -45,6 +44,10 @@ public class LoginAndLogOut implements AsyncResponse{
 
     @Override
     public void processFinish(StringBuffer output){
-        System.out.println(output.toString());
+        if(output != null) {
+            System.out.println(output.toString());
+        }else{
+            System.out.println("Falló la conexion");
+        }
     }
 }

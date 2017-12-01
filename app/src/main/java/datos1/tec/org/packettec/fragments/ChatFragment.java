@@ -76,7 +76,8 @@ public class ChatFragment extends Fragment {
                         message.put("reciever",mainActivity.findViewById(R.id.contactText));
                         message.put("body", messageText.getText().toString());
                         message.put("sender", MainActivity.myUserName);
-                        HttpRequest.post(getString(R.string.url),message.toString());
+                        HttpRequest request = new HttpRequest();
+                        request.post(getString(R.string.url),message.toString());
                     }catch(Exception e){
                         e.printStackTrace();
                     }
