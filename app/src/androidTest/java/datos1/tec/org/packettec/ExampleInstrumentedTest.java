@@ -7,6 +7,8 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import connections.HttpRequest;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -19,8 +21,9 @@ public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
+        HttpRequest request = new HttpRequest();
+        request.post("http://192.168.100.5:9080/webapi/services/messages", "{\"receiver\":\"Contact\",\"body\":\"mensaje\",\"sender\":\"Jasson\"}");
 
-        assertEquals("datos1.tec.org.packettec", appContext.getPackageName());
+        assertEquals("200", request.getResponse());
     }
 }

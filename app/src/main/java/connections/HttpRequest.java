@@ -32,25 +32,39 @@ public class HttpRequest implements AsyncResponse{
         } catch (IOException exception) {}
     }
     public void post(String query,String json) {
-        try {
-            URL url = new URL(query);
-            HttpURLConnection client = (HttpURLConnection) url.openConnection();
+//        try {
+//            URL url = new URL(query);
+//            HttpURLConnection client = (HttpURLConnection) url.openConnection();
+//
+//            client.setDoOutput(true);
+//            client.setRequestProperty("Content-Type", "application/json");
+//            client.setRequestMethod("POST");
+//
+//            DataOutputStream wr = new DataOutputStream(client.getOutputStream());
+//            wr.writeBytes(json);
+//
+//            HttpConnection connection = new HttpConnection();
+//            connection.delegate = this;
+//            connection.execute(client);
+//
+//            client.disconnect();
+//        }catch(Exception e) {}
+    try{
+        String targetUrl = query + "?json=" + json;
+        URL url = new URL(targetUrl);
 
-            client.setDoOutput(true);
-            client.setRequestProperty("Content-Type", "application/json");
-            client.setRequestMethod("POST");
+        HttpURLConnection client = (HttpURLConnection) url.openConnection();
+        client.setRequestMethod("POST");
 
-            DataOutputStream wr = new DataOutputStream(client.getOutputStream());
-            wr.writeBytes(json);
-
-            HttpConnection connection = new HttpConnection();
-            connection.delegate = this;
-            connection.execute(client);
-
-            client.disconnect();
-        }catch(Exception e) {}
+        HttpConnection connection = new HttpConnection();
+        connection.delegate = this;
+        connection.execute(client);
+        client.disconnect();
+    }catch(Exception e) {
+        System.out.println("Error !!!!!!!!!!!!!!!");
     }
 
+}
 
     @Override
     public void processFinish(StringBuffer output){
