@@ -59,9 +59,8 @@ public class ConvoFragment extends Fragment {
         }
     }
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState,String body,String sender) {
 
         View v = inflater.inflate(R.layout.fragment_convo, container, false);
 
@@ -76,7 +75,7 @@ public class ConvoFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new ConversationAdapter();
-        populateRecyclerViewValues();
+        populateRecyclerViewValues(sender,body);
 
         return v;
     }
@@ -90,8 +89,8 @@ public class ConvoFragment extends Fragment {
             //Creating POJO class object
             Conversations conversations = new Conversations();
             //Values are binded using set method of the POJO class
-            conversations.setName("Marco Herrera");
-            conversations.setContent("Hello RecyclerView! item: ");
+            conversations.setName(sender);
+            conversations.setContent(body);
             conversations.setTime("00:00 PM");
             //After setting the values, we add all the Objects to the array
             //Hence, listConentArr is a collection of Array of POJO objects
