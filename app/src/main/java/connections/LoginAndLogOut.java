@@ -3,14 +3,11 @@ package connections;
 /**
  * Created by kenne on 11/29/2017.
  */
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.BufferedReader;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 public class LoginAndLogOut implements AsyncResponse{
