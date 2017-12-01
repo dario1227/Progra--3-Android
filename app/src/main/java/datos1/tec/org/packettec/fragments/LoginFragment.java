@@ -1,5 +1,6 @@
 package datos1.tec.org.packettec.fragments;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -71,25 +72,34 @@ public class LoginFragment extends Fragment {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.loadMainFragment();
+                final MainActivity mainActivity = (MainActivity) getActivity();
+
                 usernameText = mainActivity.findViewById(R.id.Username_Text);
                 MainActivity.myUserName = usernameText.getText().toString();
 
                 StringRequest login = new StringRequest(Request.Method.POST, getString(R.string.url) + "auth?Name=" + MainActivity.myUserName, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println("Login successful");
+                        System.out.println("Login: " + response);
+                        if (response.isEmpty()) {
+                            System.out.println("Login successful");
+                            mainActivity.loadMainFragment();
+                        } else if (response == "Username Error") {
+                            Dialog.error("Username Error");
+                        } else if (response == "IP Error") {
+                            Dialog.error("IP Error");
+                        }
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        System.out.println("Username already exists");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setMessage("Error fatal, reinicie la aplicación");
+                        builder.setTitle("Error");
+                        AlertDialog dialog = builder.create();
                     }
                 });
                 MainActivity.requestQueue.add(login);
-
-
             }
         });
 

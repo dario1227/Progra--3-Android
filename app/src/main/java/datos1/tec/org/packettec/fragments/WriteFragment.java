@@ -107,13 +107,15 @@ public class WriteFragment extends Fragment {
 
         final MainActivity mainActivity = (MainActivity) getActivity();
         messageText = mainActivity.findViewById(R.id.MessageText);
+        final EditText sentTo = mainActivity.findViewById(R.id.sendTo);
+
         messageText.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 // TODO Auto-generated method stub
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
                     try {
                         JSONObject message = new JSONObject();
-                        message.put("receiver", "Contact");//mainActivity.findViewById(R.id.contactText)); //Guardar el destinatario en una variable
+                        message.put("receiver", sentTo.getText()); //Guardar el destinatario en una variable
                         message.put("body", messageText.getText().toString());
                         message.put("sender", "Jasson");//MainActivity.myUserName);
                         StringRequest sendMessage = new StringRequest(Request.Method.POST, getString(R.string.url) + "messages?json=" + message.toString(),
