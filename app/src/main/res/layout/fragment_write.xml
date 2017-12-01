@@ -139,17 +139,6 @@
                             tools:layout_editor_absoluteX="36dp"
                             tools:layout_editor_absoluteY="0dp" />
 
-                        <TextView
-                            android:id="@+id/contentchat"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_below="@+id/userNameChat"
-                            android:layout_marginTop="20dp"
-                            android:fontFamily="@font/raleway_semibold"
-                            android:text="content"
-                            android:textSize="24sp" />
-
                         <EditText
                             android:id="@+id/sendTo"
                             android:layout_width="wrap_content"

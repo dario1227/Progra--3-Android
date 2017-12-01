@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import datos1.tec.org.packettec.R;
+import datos1.tec.org.packettec.activities.MainActivity;
 
 
 public class ChatFragment extends Fragment {
@@ -25,7 +26,6 @@ public class ChatFragment extends Fragment {
     private TextView contentchat;
 
 
-
     public ChatFragment() {
         // Required empty public constructor
     }
@@ -39,8 +39,14 @@ public class ChatFragment extends Fragment {
      * @return A new instance of fragment ChatFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ChatFragment newInstance(String param1, String param2) {
+    public static ChatFragment newInstance(String param1, String param2, String username, String body) {
+
         ChatFragment fragment = new ChatFragment();
+        fragment.userNameChat = MainActivity.getMainActivity().findViewById(R.id.userNameChat);
+        fragment.contentchat = MainActivity.getMainActivity().findViewById(R.id.contentchat);
+        fragment.userNameChat.setText(username);
+        fragment.contentchat.setText(body);
+
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -62,9 +68,6 @@ public class ChatFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_chat, container, false);
-
-        userNameChat = v.findViewById(R.id.userNameChat);
-        contentchat = v.findViewById(R.id.contentchat);
 
         return v;
 

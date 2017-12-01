@@ -26,6 +26,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationsViewH
     public void onBindViewHolder(ConversationsViewHolder holder, int position) {
         final Conversations conversations = listMembers.get(position);
         holder.updateUI(conversations);
+
     }
 
     @Override

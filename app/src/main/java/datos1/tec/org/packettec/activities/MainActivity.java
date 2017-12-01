@@ -76,9 +76,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void loadChatFragment() {
+    public void loadChatFragment(String userName, String body) {
 
-        ChatFragment chatFragment = new ChatFragment();
+        ChatFragment chatFragment;
+        chatFragment = ChatFragment.newInstance("", "", userName, body);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, chatFragment).addToBackStack(null).commit();
 
     }
