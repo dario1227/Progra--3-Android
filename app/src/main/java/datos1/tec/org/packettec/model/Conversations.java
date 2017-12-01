@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class Conversations {
 
-    private String name;
-    private String time;
-    private String content;
+    private String name = "";
+    private String time = "";
+    private String content = "";
     private ArrayList<Conversations> conversations = new ArrayList<>();
 
     public Conversations() {
