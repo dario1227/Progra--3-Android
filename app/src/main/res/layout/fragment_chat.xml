@@ -186,13 +186,6 @@
                 android:hint="Type something..."
                 android:inputType="textPersonName" />
 
-            <ImageButton
-                android:id="@+id/attachBtn"
-                android:layout_width="3dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="#FFF"
-                android:src="@drawable/attachment" />
         </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>

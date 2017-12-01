@@ -79,6 +79,7 @@ public class ChatFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
 
+
         final MainActivity mainActivity = (MainActivity) getActivity();
         messageText = mainActivity.findViewById(R.id.MessageText);
         messageText.setOnKeyListener(new View.OnKeyListener() {
@@ -91,7 +92,7 @@ public class ChatFragment extends Fragment {
                         message.put("body", messageText.getText().toString());
                         message.put("sender", "Jasson");//MainActivity.myUserName);
                         HttpRequest request = new HttpRequest();
-                        //request.post(getString(R.string.url) + "messages",message.toString());
+                        request.post(getString(R.string.url) + "messages", message.toString());
                         System.out.println(message.toString());
                     }catch(Exception e){
                         e.printStackTrace();
