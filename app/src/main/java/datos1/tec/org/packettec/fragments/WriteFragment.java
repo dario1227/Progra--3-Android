@@ -27,12 +27,10 @@ import datos1.tec.org.packettec.activities.MainActivity;
  * create an instance of this fragment.
  */
 public class WriteFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private ImageButton button;
@@ -52,7 +50,6 @@ public class WriteFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment WriteFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static WriteFragment newInstance(String param1, String param2) {
         WriteFragment fragment = new WriteFragment();
         Bundle args = new Bundle();
@@ -111,7 +108,6 @@ public class WriteFragment extends Fragment {
 
         messageText.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                // TODO Auto-generated method stub
                 if (keyCode == KeyEvent.KEYCODE_ENTER) {
                     try {
                         JSONObject message = new JSONObject();
