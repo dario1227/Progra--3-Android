@@ -12,6 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+
 public class LoginAndLogOut implements AsyncResponse{
     public void LogIn(String address, String name) {
         try {

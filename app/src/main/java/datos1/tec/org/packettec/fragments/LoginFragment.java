@@ -82,6 +82,7 @@ public class LoginFragment extends Fragment {
                 usernameText = mainActivity.findViewById(R.id.Username_Text);
                 LoginAndLogOut auth = new LoginAndLogOut();
                 auth.LogIn(getString(R.string.url), usernameText.getText().toString());
+
             }
         });
 

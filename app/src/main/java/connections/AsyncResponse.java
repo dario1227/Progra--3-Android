@@ -5,5 +5,7 @@ package connections;
  */
 
 public interface AsyncResponse {
+
     void processFinish(StringBuffer output);
+
 }

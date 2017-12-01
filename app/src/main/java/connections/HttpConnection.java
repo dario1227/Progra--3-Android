@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
  * Created by Jai on 30/11/17.
  */
 
+
 public class HttpConnection extends AsyncTask<HttpURLConnection, Integer, StringBuffer> {
     public AsyncResponse delegate = null;
 

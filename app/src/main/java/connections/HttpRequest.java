@@ -11,6 +11,7 @@ import java.net.URL;
  * Created by Marco Herrera on 26/11/2017.
  */
 
+
 public class HttpRequest {
 
     public static String get(String query) {
