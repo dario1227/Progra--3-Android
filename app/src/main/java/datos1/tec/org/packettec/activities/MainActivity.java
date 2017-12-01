@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
 import connections.LoginAndLogOut;
 import datos1.tec.org.packettec.R;
 import datos1.tec.org.packettec.fragments.ChatFragment;
@@ -19,6 +22,7 @@ import datos1.tec.org.packettec.fragments.WriteFragment;
 public class MainActivity extends AppCompatActivity {
 
     public static String myUserName = "";
+    public static RequestQueue requestQueue;
     private static MainActivity mainActivity;
 
     public static MainActivity getMainActivity() {
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         MainActivity.setMainActivity(this);
+        requestQueue = Volley.newRequestQueue(this.getApplicationContext());
 
         FragmentManager manager = getSupportFragmentManager();
         Fragment fragment = manager.findFragmentById(R.id.fragment_container);
