@@ -18,11 +18,13 @@ import datos1.tec.org.packettec.adapters.MessagesAdaptor;
  * create an instance of this fragment.
  */
 public class MessageFragment extends Fragment {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    RecyclerView recyclerView;
+    MessagesAdaptor adapter;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -67,6 +69,10 @@ public class MessageFragment extends Fragment {
 
         RecyclerView recyclerView = v.findViewById(R.id.recycler_messages);
 
+        recyclerView.addItemDecoration(new VerticalSpaceItemDecorator(20));
+
+        recyclerView.setAdapter(adapter);
+
         MessagesAdaptor adaptor = new MessagesAdaptor();
         recyclerView.setAdapter(adaptor);
 
@@ -74,9 +80,32 @@ public class MessageFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
+        adaptor = new MessagesAdaptor();
+        //populateRecyclerViewValues();
+
 
         return v;
 
     }
+
+//    public void populateRecyclerViewValues(String sender,String body) {
+//
+//        ArrayList<Message> listContentArr = new ArrayList<>();
+//
+//        //Creating POJO class object
+//        Message conversations = new Message();
+//        //Values are binded using set method of the POJO class
+//        Message.setUserName(sender);
+//        Message.setContent(body);
+//        //After setting the values, we add all the Objects to the array
+//        //Hence, listConentArr is a collection of Array of POJO objects
+//
+//        listContentArr.add(conversations);
+//
+//        //We set the array to the adapter
+//        adapter.setListContent(listContentArr);
+//        //We in turn set the adapter to the RecyclerView
+//        recyclerView.setAdapter(adapter);
+//    }
 
 }

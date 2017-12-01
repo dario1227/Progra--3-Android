@@ -2,6 +2,7 @@ package datos1.tec.org.packettec.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,16 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
+        View v = inflater.inflate(R.layout.fragment_chat, container, false);
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+        MessageFragment messageFragment;
+
+        messageFragment = MessageFragment.newInstance("", "");
+        fragmentManager.beginTransaction().add(R.id.messages_bubble_container, messageFragment).commit();
+
+        return v;
     }
 
 }
