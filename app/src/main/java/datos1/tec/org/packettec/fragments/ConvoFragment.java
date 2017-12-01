@@ -81,23 +81,23 @@ public class ConvoFragment extends Fragment {
         return v;
     }
 
-    private void populateRecyclerViewValues() {
+    public void populateRecyclerViewValues(String sender,String body) {
 
         ArrayList<Conversations> listContentArr = new ArrayList<>();
 
 
-        for (int iter = 0; iter <= 50; iter++) {
+
             //Creating POJO class object
             Conversations conversations = new Conversations();
             //Values are binded using set method of the POJO class
             conversations.setName("Marco Herrera");
-            conversations.setContent("Hello RecyclerView! item: " + iter);
-            conversations.setTime("10:45PM");
+            conversations.setContent("Hello RecyclerView! item: ");
+            conversations.setTime("00:00 PM");
             //After setting the values, we add all the Objects to the array
             //Hence, listConentArr is a collection of Array of POJO objects
 
             listContentArr.add(conversations);
-        }
+
         //We set the array to the adapter
         adapter.setListContent(listContentArr);
         //We in turn set the adapter to the RecyclerView
