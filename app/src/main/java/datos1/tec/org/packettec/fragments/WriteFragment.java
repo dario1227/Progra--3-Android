@@ -3,12 +3,19 @@ package datos1.tec.org.packettec.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
+import org.json.JSONObject;
+
+import connections.HttpRequest;
 import datos1.tec.org.packettec.R;
+import datos1.tec.org.packettec.activities.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +32,8 @@ public class WriteFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private ImageButton button;
+    private ImageButton backButton;
+    private EditText messageText;
 
 
     public WriteFragment() {
@@ -73,7 +82,45 @@ public class WriteFragment extends Fragment {
             }
         });
 
+        backButton = v.findViewById(R.id.backBtn);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+                if (manager.getBackStackEntryCount() > 0) {
+                    manager.popBackStackImmediate();
+                }
+            }
+        });
+
         return v;
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+
+        final MainActivity mainActivity = (MainActivity) getActivity();
+        messageText = mainActivity.findViewById(R.id.MessageText);
+        messageText.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    try {
+                        JSONObject message = new JSONObject();
+                        message.put("receiver", "Contact");//mainActivity.findViewById(R.id.contactText)); //Guardar el destinatario en una variable
+                        message.put("body", messageText.getText().toString());
+                        message.put("sender", "Jasson");//MainActivity.myUserName);
+                        HttpRequest request = new HttpRequest();
+                        request.post(getString(R.string.url) + "messages", message.toString());
+                        System.out.println(message.toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                return true;
+            }
+        });
+    }
 }

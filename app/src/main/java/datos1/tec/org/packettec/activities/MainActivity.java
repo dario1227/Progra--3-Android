@@ -14,11 +14,12 @@ import datos1.tec.org.packettec.fragments.LoginFragment;
 import datos1.tec.org.packettec.fragments.MainFragment;
 import datos1.tec.org.packettec.fragments.NewMessageFragment;
 import datos1.tec.org.packettec.fragments.SearchFragment;
+import datos1.tec.org.packettec.fragments.WriteFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static MainActivity mainActivity;
     public static String myUserName = "";
+    private static MainActivity mainActivity;
 
     public static MainActivity getMainActivity() {
         return mainActivity;
@@ -69,6 +70,13 @@ public class MainActivity extends AppCompatActivity {
 
         ChatFragment chatFragment = new ChatFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, chatFragment).addToBackStack(null).commit();
+
+    }
+
+    public void loadWriteFragment() {
+
+        WriteFragment writeFragment = new WriteFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, writeFragment).addToBackStack(null).commit();
 
     }
 
