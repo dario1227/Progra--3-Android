@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import datos1.tec.org.packettec.R;
-import datos1.tec.org.packettec.activities.MainActivity;
 import datos1.tec.org.packettec.holders.ConversationsViewHolder;
 import datos1.tec.org.packettec.model.Conversations;
 
@@ -27,13 +26,6 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationsViewH
     public void onBindViewHolder(ConversationsViewHolder holder, int position) {
         final Conversations conversations = listMembers.get(position);
         holder.updateUI(conversations);
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.getMainActivity().loadChatFragment();
-            }
-        });
     }
 
     @Override
