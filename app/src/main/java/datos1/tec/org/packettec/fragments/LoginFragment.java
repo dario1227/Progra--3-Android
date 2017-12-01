@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -98,6 +99,7 @@ public class LoginFragment extends Fragment {
                         AlertDialog dialog = builder.create();
                     }
                 });
+                login.setRetryPolicy(new DefaultRetryPolicy(0, 0, 0));
                 MainActivity.requestQueue.add(login);
             }
         });

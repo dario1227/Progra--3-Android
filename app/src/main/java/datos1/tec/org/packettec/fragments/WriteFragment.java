@@ -123,8 +123,11 @@ public class WriteFragment extends Fragment {
 
                                     @Override
                                     public void onResponse(String response) {
-                                        messageText.getText().clear();
-                                        System.out.println("Mensaje enviado satisfactoriamente");
+                                        if (response.isEmpty()) {
+                                            messageText.getText().clear();
+                                        } else {
+                                            Dialog.error("Destinatario inválido");
+                                        }
                                     }
                                 }, new Response.ErrorListener() {
 
