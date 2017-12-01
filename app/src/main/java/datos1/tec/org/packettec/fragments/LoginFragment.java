@@ -14,6 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import connections.Polling;
 import datos1.tec.org.packettec.R;
 import datos1.tec.org.packettec.activities.MainActivity;
 
@@ -77,6 +78,7 @@ public class LoginFragment extends Fragment {
                 usernameText = mainActivity.findViewById(R.id.Username_Text);
                 MainActivity.myUserName = usernameText.getText().toString();
 
+
                 StringRequest login = new StringRequest(Request.Method.POST, getString(R.string.url) + "auth?Name=" + MainActivity.myUserName, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -103,6 +105,11 @@ public class LoginFragment extends Fragment {
             }
         });
 
+
+        Polling polling = new Polling();
+        Thread thread = new Thread(polling);
+        thread.start();
+        //polling.stop();
 
         return v;
     }

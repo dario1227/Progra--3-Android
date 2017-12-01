@@ -97,6 +97,7 @@ public class MainFragment extends Fragment {
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.loadConversationsMainFragment();
+
             }
         });
 
