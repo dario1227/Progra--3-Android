@@ -88,7 +88,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 MainActivity mainActivity = (MainActivity) getActivity();
-                mainActivity.loadChatFragment();
+                mainActivity.loadWriteFragment();
             }
         });
 
