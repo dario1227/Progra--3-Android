@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import connections.LoginAndLogOut;
 import datos1.tec.org.packettec.R;
 import datos1.tec.org.packettec.fragments.ChatFragment;
 import datos1.tec.org.packettec.fragments.ConversationsMainFragment;
@@ -17,6 +18,7 @@ import datos1.tec.org.packettec.fragments.SearchFragment;
 public class MainActivity extends AppCompatActivity {
 
     private static MainActivity mainActivity;
+    public static String myUserName = "";
 
     public static MainActivity getMainActivity() {
         return mainActivity;
@@ -76,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, conversationsMainFragment).addToBackStack(null).commit();
 
     }
-
+    @Override
+    protected void onDestroy(){
+        LoginAndLogOut logout = new LoginAndLogOut();
+        logout.LogOut(getString(R.string.url));
+        super.onDestroy();
+    }
 }
 

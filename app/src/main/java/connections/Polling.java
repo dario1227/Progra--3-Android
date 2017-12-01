@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import java.io.File;
 
 import datos1.tec.org.packettec.R;
+import datos1.tec.org.packettec.activities.MainActivity;
 
 /**
  * Created by Marco Herrera on 28/11/2017.
@@ -17,11 +18,16 @@ public class Polling implements Runnable {
     public void run() {
         while (true) {
             try {
-                String message = HttpRequest.get(R.string.url + "/messages/messages/search");
-                JSONObject messages = new JSONObject(HttpRequest.get(R.string.url + "/messages/messages/search"));
+                HttpRequest request = new HttpRequest();
+                request.get(R.string.url + "/messages/messages/search");
+                String message = request.getResponse();
+
+                request.get(R.string.url + "/messages/messages/search");
+
+                JSONObject messages = new JSONObject(request.getResponse());
 
                 if(messages.has("sender")){
-                    if(messages.get("receiver").equals("_____NOMBREUSARIO___")){
+                    if(messages.get("receiver").equals(MainActivity.myUserName)){
 
                         String sender = (String) messages.get("sender");
                         String body  = "";
@@ -46,7 +52,7 @@ public class Polling implements Runnable {
                         }
                     }
                     else{
-                        HttpRequest.post(R.string.url+ "/messages",message);
+                        request.post(R.string.url+ "/messages",message);
                     }
                 }
             } catch (Exception e) {

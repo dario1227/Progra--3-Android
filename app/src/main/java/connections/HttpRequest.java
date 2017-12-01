@@ -12,9 +12,11 @@ import java.net.URL;
  */
 
 
-public class HttpRequest {
+public class HttpRequest implements AsyncResponse{
 
-    public static String get(String query) {
+    String response;
+
+    public void get(String query) {
         try {
 
             URL url = new URL(query);
@@ -22,21 +24,14 @@ public class HttpRequest {
             HttpURLConnection client = (HttpURLConnection) url.openConnection();
             client.setRequestMethod("GET");
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
+            HttpConnection connection = new HttpConnection();
+            connection.delegate = this;
+            connection.execute(client);
 
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
             client.disconnect();
-            return response.toString();
-        } catch (IOException exception) {
-            return null;
-        }
+        } catch (IOException exception) {}
     }
-    public static void post(String query,String json) {
+    public void post(String query,String json) {
         try {
             URL url = new URL(query);
             HttpURLConnection client = (HttpURLConnection) url.openConnection();
@@ -48,18 +43,25 @@ public class HttpRequest {
             DataOutputStream wr = new DataOutputStream(client.getOutputStream());
             wr.writeBytes(json);
 
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(client.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
+            HttpConnection connection = new HttpConnection();
+            connection.delegate = this;
+            connection.execute(client);
 
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
             client.disconnect();
         }catch(Exception e) {}
     }
 
+    @Override
+    public void processFinish(StringBuffer output){
+        if(output != null) {
+            response = output.toString();
+            System.out.println(response);
+        }else{
+            System.out.println("No se pudo conectar");
+        }
+    }
 
+    public String getResponse(){
+        return this.response;
+    }
 }
