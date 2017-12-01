@@ -20,14 +20,12 @@ public class ConvoFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static ArrayList<Conversations> conver = new ArrayList<>();
     RecyclerView recyclerView;
     ConversationAdapter adapter;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private String body;
-    private String sender;
-
 
     public ConvoFragment() {
         // Required empty public constructor
@@ -49,6 +47,18 @@ public class ConvoFragment extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public static void addConversation(String sender, String body) {
+        Conversations conversations = new Conversations();
+        //Values are binded using set method of the POJO class
+        conversations.setName(sender);
+        conversations.setContent(body);
+        conversations.setTime("00:00 PM");
+        //After setting the values, we add all the Objects to the array
+        //Hence, listConentArr is a collection of Array of POJO objects
+
+        conver.add(conversations);
     }
 
     @Override
@@ -78,48 +88,19 @@ public class ConvoFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new ConversationAdapter();
-        populateRecyclerViewValues(sender,body);
+        populateRecyclerViewValues();
 
         return v;
     }
 
-    public void populateRecyclerViewValues(String sender,String body) {
-
-        ArrayList<Conversations> listContentArr = new ArrayList<>();
-
-
-
-            //Creating POJO class object
-            Conversations conversations = new Conversations();
-            //Values are binded using set method of the POJO class
-            conversations.setName(sender);
-            conversations.setContent(body);
-            conversations.setTime("00:00 PM");
-            //After setting the values, we add all the Objects to the array
-            //Hence, listConentArr is a collection of Array of POJO objects
-
-            listContentArr.add(conversations);
+    public void populateRecyclerViewValues() {
 
         //We set the array to the adapter
-        adapter.setListContent(listContentArr);
+        adapter.setListContent(conver);
         //We in turn set the adapter to the RecyclerView
         recyclerView.setAdapter(adapter);
     }
 
-    public String getBody() {
-        return body;
-    }
 
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
 }
 

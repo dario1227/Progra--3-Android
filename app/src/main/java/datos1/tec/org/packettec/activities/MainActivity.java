@@ -24,6 +24,8 @@ import datos1.tec.org.packettec.fragments.WriteFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String URL = "http://192.168.100.5:9080/webapi/services/";
+
     public static String myUserName = "";
     public static RequestQueue requestQueue;
     private static MainActivity mainActivity;
