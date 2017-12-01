@@ -2,12 +2,12 @@ package datos1.tec.org.packettec.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import org.json.JSONObject;
 
@@ -26,6 +26,9 @@ public class ChatFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private EditText messageText;
+    private TextView userNameChat;
+    private TextView contentchat;
+
 
 
     public ChatFragment() {
@@ -65,17 +68,8 @@ public class ChatFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_chat, container, false);
 
-        final MainActivity mainActivity = (MainActivity) getActivity();
-        mainActivity.loadChatFragment();
-
-
-
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-        MessageFragment messageFragment;
-
-        messageFragment = MessageFragment.newInstance("", "");
-        fragmentManager.beginTransaction().add(R.id.messages_bubble_container, messageFragment).commit();
+        userNameChat = v.findViewById(R.id.userNameChat);
+        contentchat = v.findViewById(R.id.contentchat);
 
         return v;
 

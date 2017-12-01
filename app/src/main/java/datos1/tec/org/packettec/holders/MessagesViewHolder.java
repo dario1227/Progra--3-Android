@@ -11,7 +11,7 @@ import datos1.tec.org.packettec.model.Messages;
 public class MessagesViewHolder extends RecyclerView.ViewHolder {
     private TextView userName;
     private TextView content;
-    private TextView special;
+    //private TextView special;
 
     public MessagesViewHolder(View itemView) {
         super(itemView);
@@ -22,6 +22,6 @@ public class MessagesViewHolder extends RecyclerView.ViewHolder {
     public void updateUI(Messages messages) {
         userName.setText(messages.getUserName());
         content.setText(messages.getContent());
-        special.setText(messages.getSpecial());
+        //special.setText(messages.getSpecial());
     }
 }

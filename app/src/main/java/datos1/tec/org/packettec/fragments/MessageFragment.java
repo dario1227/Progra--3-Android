@@ -62,8 +62,8 @@ public class MessageFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-            String body = "";
-            String sender = "";
+            String body = "New Message";
+            String sender = "Marco";
 
         }
     }
@@ -74,40 +74,65 @@ public class MessageFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_message, container, false);
 
-        RecyclerView recyclerView = v.findViewById(R.id.recycler_messages);
+        recyclerView = v.findViewById(R.id.recycler_messages);
+        System.out.println(recyclerView);
 
         recyclerView.addItemDecoration(new VerticalSpaceItemDecorator(20));
 
         recyclerView.setAdapter(adapter);
 
-        recyclerView.setAdapter(adapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new MessagesAdaptor();
-        populateRecyclerViewValues(sender, body);
+        populateRecyclerViewValuesMessages();
 
 
         return v;
 
     }
 
-    public void populateRecyclerViewValues(String sender, String body) {
+//    public void populateRecyclerViewValues(String sender, String body) {
+//
+//        ArrayList<Messages> listContentArr = new ArrayList<>();
+//
+//        //Creating POJO class object
+//        Messages messages = new Messages();
+//        //Values are binded using set method of the POJO class
+//        messages.setUserName(sender);
+//        messages.setContent(body);
+//        //After setting the values, we add all the Objects to the array
+//        //Hence, listConentArr is a collection of Array of POJO objects
+//
+//        listContentArr.add(messages);
+//
+//        //We set the array to the adapter
+//        adapter.setListContent(listContentArr);
+//        //We in turn set the adapter to the RecyclerView
+//        recyclerView.setAdapter(adapter);
+//    }
+
+
+    public void populateRecyclerViewValuesMessages() {
 
         ArrayList<Messages> listContentArr = new ArrayList<>();
-
-        //Creating POJO class object
-        Messages messages = new Messages();
-        //Values are binded using set method of the POJO class
-        messages.setUserName(sender);
-        messages.setContent(body);
-        //After setting the values, we add all the Objects to the array
-        //Hence, listConentArr is a collection of Array of POJO objects
-
-        listContentArr.add(messages);
-
+        /** This is where we pass the data to the adpater using POJO class.
+         *  The for loop here is optional. I've just populated same data for 50 times.
+         *  You can use a JSON object request to gather the required values and populate in the
+         *  RecyclerView.
+         * */
+        for (int iter = 0; iter <= 10; iter++) {
+            //Creating POJO class object
+            Messages pojoObject = new Messages();
+            //Values are binded using set method of the POJO class
+            pojoObject.setUserName("Hari Vigensh Jayapalan");
+            pojoObject.setContent("Hello RecyclerView! item: " + iter);
+            //After setting the values, we add all the Objects to the array
+            //Hence, listConentArr is a collection of Array of POJO objects
+            listContentArr.add(pojoObject);
+        }
         //We set the array to the adapter
         adapter.setListContent(listContentArr);
         //We in turn set the adapter to the RecyclerView
