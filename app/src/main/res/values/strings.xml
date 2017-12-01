@@ -13,7 +13,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="url">"http://desktop-i52gf5q:9080/webapi/services"</string>
+    <string name="url">"http://192.168.100.5:9080/webapi/services/"</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="send_a_message">Send a message</string>
