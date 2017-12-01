@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import connections.LoginAndLogOut;
+import connections.Polling;
 import datos1.tec.org.packettec.R;
 import datos1.tec.org.packettec.activities.MainActivity;
 
@@ -73,6 +74,11 @@ public class LoginFragment extends Fragment {
                 LoginAndLogOut auth = new LoginAndLogOut();
                 MainActivity.myUserName = usernameText.getText().toString();
                 auth.LogIn(getString(R.string.url), usernameText.getText().toString());
+
+                Polling thread = new Polling();
+                thread.run();
+
+
 
             }
         });

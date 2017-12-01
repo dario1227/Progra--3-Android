@@ -93,7 +93,7 @@ public class ChatFragment extends Fragment {
                         message.put("sender", "Jasson");//MainActivity.myUserName);
                         HttpRequest request = new HttpRequest();
                         request.post(getString(R.string.url) + "messages", message.toString());
-                        System.out.println(message.toString());
+
                     }catch(Exception e){
                         e.printStackTrace();
                     }

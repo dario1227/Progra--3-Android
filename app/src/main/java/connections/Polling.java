@@ -1,6 +1,5 @@
 package connections;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -8,15 +7,18 @@ import java.io.File;
 import datos1.tec.org.packettec.R;
 import datos1.tec.org.packettec.activities.MainActivity;
 
-/**
- * Created by Marco Herrera on 28/11/2017.
- */
 
 public class Polling implements Runnable {
+
 
     @Override
     public void run() {
         while (true) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             try {
                 HttpRequest request = new HttpRequest();
                 request.get(R.string.url + "/messages/messages/search");
