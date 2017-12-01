@@ -91,28 +91,7 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="232dp"
-            android:layout_height="85dp"
-            android:layout_marginBottom="66dp"
-            android:fontFamily="@font/raleway_extrabold"
-            android:text="Alguna Manera de montar esto ^^^^^"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/screenshot"
-            app:layout_constraintBottom_toTopOf="@+id/textView6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-            app:layout_constraintVertical_bias="0.512" />
 
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>
