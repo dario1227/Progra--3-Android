@@ -4,6 +4,7 @@ import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+
 public class VerticalSpaceItemDecorator extends RecyclerView.ItemDecoration {
 
     private final int spacer;
@@ -17,4 +18,5 @@ public class VerticalSpaceItemDecorator extends RecyclerView.ItemDecoration {
         super.getItemOffsets(outRect, view, parent, state);
         outRect.bottom = spacer;
     }
+
 }
