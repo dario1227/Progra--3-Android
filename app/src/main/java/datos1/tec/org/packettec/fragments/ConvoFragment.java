@@ -90,6 +90,9 @@ public class ConvoFragment extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new ConversationAdapter();
