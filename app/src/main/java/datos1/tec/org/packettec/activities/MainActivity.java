@@ -17,6 +17,7 @@ import datos1.tec.org.packettec.fragments.SearchFragment;
 public class MainActivity extends AppCompatActivity {
 
     private static MainActivity mainActivity;
+    public static String myUserName = "";
 
     public static MainActivity getMainActivity() {
         return mainActivity;

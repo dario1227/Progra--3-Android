@@ -71,6 +71,7 @@ public class LoginFragment extends Fragment {
                 mainActivity.loadMainFragment();
                 usernameText = mainActivity.findViewById(R.id.Username_Text);
                 LoginAndLogOut auth = new LoginAndLogOut();
+                MainActivity.myUserName = usernameText.getText().toString();
                 auth.LogIn(getString(R.string.url), usernameText.getText().toString());
 
             }

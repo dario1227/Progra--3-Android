@@ -2,11 +2,19 @@ package datos1.tec.org.packettec.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import connections.HttpRequest;
 import datos1.tec.org.packettec.R;
+import datos1.tec.org.packettec.activities.MainActivity;
 
 
 public class ChatFragment extends Fragment {
@@ -18,6 +26,7 @@ public class ChatFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private EditText messageText;
 
 
     public ChatFragment() {
@@ -55,7 +64,29 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        final MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.loadChatFragment();
+        messageText = mainActivity.findViewById(R.id.MessageText);
+        messageText.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode==KeyEvent.KEYCODE_ENTER) {
+                    try{
+                        JSONObject message = new JSONObject();
+                        message.put("reciever",mainActivity.findViewById(R.id.contactText));
+                        message.put("body", messageText.getText().toString());
+                        message.put("sender", MainActivity.myUserName);
+                        HttpRequest.post(getString(R.string.url),message.toString());
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                return true;
+            }
+        });
         return inflater.inflate(R.layout.fragment_chat, container, false);
     }
+
+
 
 }
