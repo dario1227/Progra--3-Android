@@ -58,7 +58,7 @@ public class ConvoFragment extends Fragment {
         conversations.setContent(body);
         Date now = Calendar.getInstance().getTime();
         String hour = String.valueOf(now.getHours());
-        String minutes = String.valueOf(now.getMinutes());
+        String minutes = now.getMinutes() > 10 ? String.valueOf(now.getMinutes()) : "0" + String.valueOf(now.getMinutes());
         conversations.setTime(hour + ":" + minutes);
         //After setting the values, we add all the Objects to the array
         //Hence, listConentArr is a collection of Array of POJO objects
