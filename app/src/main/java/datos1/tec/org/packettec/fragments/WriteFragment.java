@@ -11,9 +11,13 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
 import org.json.JSONObject;
 
-import connections.HttpRequest;
 import datos1.tec.org.packettec.R;
 import datos1.tec.org.packettec.activities.MainActivity;
 
@@ -112,9 +116,22 @@ public class WriteFragment extends Fragment {
                         message.put("receiver", "Contact");//mainActivity.findViewById(R.id.contactText)); //Guardar el destinatario en una variable
                         message.put("body", messageText.getText().toString());
                         message.put("sender", "Jasson");//MainActivity.myUserName);
-                        HttpRequest request = new HttpRequest();
-                        request.post(getString(R.string.url) + "messages", message.toString());
-                        System.out.println(message.toString());
+                        StringRequest sendMessage = new StringRequest(Request.Method.POST, getString(R.string.url) + "messages?json=" + message.toString(),
+                                new Response.Listener<String>() {
+
+                                    @Override
+                                    public void onResponse(String response) {
+                                        messageText.getText().clear();
+                                        System.out.println("Mensaje enviado satisfactoriamente");
+                                    }
+                                }, new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                System.out.println("No se pudo enviar el mensaje: " + error.getMessage().toString());
+                            }
+                        });
+                        MainActivity.requestQueue.add(sendMessage);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

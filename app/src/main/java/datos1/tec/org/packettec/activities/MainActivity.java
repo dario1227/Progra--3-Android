@@ -6,10 +6,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import connections.LoginAndLogOut;
 import datos1.tec.org.packettec.R;
 import datos1.tec.org.packettec.fragments.ChatFragment;
 import datos1.tec.org.packettec.fragments.ConversationsMainFragment;
@@ -93,8 +96,17 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onDestroy(){
-        LoginAndLogOut logout = new LoginAndLogOut();
-        logout.LogOut(getString(R.string.url));
+        StringRequest logout = new StringRequest(Request.Method.POST, getString(R.string.url) + "/auth/logOut", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println("Logout successful");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("Logout unsuccessful");
+            }
+        });
         super.onDestroy();
     }
 }

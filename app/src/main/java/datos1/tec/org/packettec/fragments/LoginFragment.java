@@ -8,8 +8,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import connections.LoginAndLogOut;
-import connections.Polling;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
 import datos1.tec.org.packettec.R;
 import datos1.tec.org.packettec.activities.MainActivity;
 
@@ -71,13 +74,20 @@ public class LoginFragment extends Fragment {
                 MainActivity mainActivity = (MainActivity) getActivity();
                 mainActivity.loadMainFragment();
                 usernameText = mainActivity.findViewById(R.id.Username_Text);
-                LoginAndLogOut auth = new LoginAndLogOut();
                 MainActivity.myUserName = usernameText.getText().toString();
-                auth.LogIn(getString(R.string.url), usernameText.getText().toString());
 
-                Polling thread = new Polling();
-                thread.run();
-
+                StringRequest login = new StringRequest(Request.Method.POST, getString(R.string.url) + "auth?Name=" + MainActivity.myUserName, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println("Login successful");
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("Username already exists");
+                    }
+                });
+                MainActivity.requestQueue.add(login);
 
 
             }
