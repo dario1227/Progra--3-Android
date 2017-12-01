@@ -80,14 +80,11 @@ public class LoginFragment extends Fragment {
                 StringRequest login = new StringRequest(Request.Method.POST, getString(R.string.url) + "auth?Name=" + MainActivity.myUserName, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println("Login: " + response);
                         if (response.isEmpty()) {
                             System.out.println("Login successful");
                             mainActivity.loadMainFragment();
-                        } else if (response == "Username Error") {
-                            Dialog.error("Username Error");
-                        } else if (response == "IP Error") {
-                            Dialog.error("IP Error");
+                        } else {
+                            Dialog.error("El nombre de usuario o la dirección IP ya están registradas");
                         }
                     }
                 }, new Response.ErrorListener() {

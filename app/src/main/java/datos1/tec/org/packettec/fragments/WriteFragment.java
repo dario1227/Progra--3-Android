@@ -117,7 +117,7 @@ public class WriteFragment extends Fragment {
                         JSONObject message = new JSONObject();
                         message.put("receiver", sentTo.getText()); //Guardar el destinatario en una variable
                         message.put("body", messageText.getText().toString());
-                        message.put("sender", "Jasson");//MainActivity.myUserName);
+                        message.put("sender", MainActivity.myUserName);
                         StringRequest sendMessage = new StringRequest(Request.Method.POST, getString(R.string.url) + "messages?json=" + message.toString(),
                                 new Response.Listener<String>() {
 
