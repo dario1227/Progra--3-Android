@@ -64,8 +64,14 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_chat, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+
         final MainActivity mainActivity = (MainActivity) getActivity();
-        mainActivity.loadChatFragment();
         messageText = mainActivity.findViewById(R.id.MessageText);
         messageText.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -73,11 +79,12 @@ public class ChatFragment extends Fragment {
                 if (keyCode==KeyEvent.KEYCODE_ENTER) {
                     try{
                         JSONObject message = new JSONObject();
-                        message.put("reciever",mainActivity.findViewById(R.id.contactText));
+                        message.put("receiver", "Contact");//mainActivity.findViewById(R.id.contactText)); //Guardar el destinatario en una variable
                         message.put("body", messageText.getText().toString());
-                        message.put("sender", MainActivity.myUserName);
+                        message.put("sender", "Jasson");//MainActivity.myUserName);
                         HttpRequest request = new HttpRequest();
-                        request.post(getString(R.string.url),message.toString());
+                        request.post(getString(R.string.url) + "messages",message.toString());
+                        System.out.println(message.toString());
                     }catch(Exception e){
                         e.printStackTrace();
                     }
@@ -85,9 +92,6 @@ public class ChatFragment extends Fragment {
                 return true;
             }
         });
-        return inflater.inflate(R.layout.fragment_chat, container, false);
     }
-
-
 
 }

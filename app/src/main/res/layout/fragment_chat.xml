@@ -37,7 +37,7 @@
                     android:drawableLeft="@drawable/online"
                     android:drawablePadding="5dp"
                     android:fontFamily="@font/raleway_semibold"
-                    android:text="Contact Name"
+                    android:text="Contact"
                     android:textAlignment="center"
                     android:textColor="@color/font_title"
                     android:textSize="18sp"

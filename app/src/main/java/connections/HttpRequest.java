@@ -51,6 +51,7 @@ public class HttpRequest implements AsyncResponse{
         }catch(Exception e) {}
     }
 
+
     @Override
     public void processFinish(StringBuffer output){
         if(output != null) {
