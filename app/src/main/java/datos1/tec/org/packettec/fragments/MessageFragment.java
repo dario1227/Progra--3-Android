@@ -9,8 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import datos1.tec.org.packettec.R;
 import datos1.tec.org.packettec.adapters.MessagesAdaptor;
+import datos1.tec.org.packettec.model.Messages;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,15 +21,18 @@ import datos1.tec.org.packettec.adapters.MessagesAdaptor;
  * create an instance of this fragment.
  */
 public class MessageFragment extends Fragment {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    RecyclerView recyclerView;
+    MessagesAdaptor adapter;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private String body;
+    private String sender;
 
     public MessageFragment() {
         // Required empty public constructor
@@ -56,6 +62,9 @@ public class MessageFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            String body = "";
+            String sender = "";
+
         }
     }
 
@@ -67,16 +76,57 @@ public class MessageFragment extends Fragment {
 
         RecyclerView recyclerView = v.findViewById(R.id.recycler_messages);
 
-        MessagesAdaptor adaptor = new MessagesAdaptor();
-        recyclerView.setAdapter(adaptor);
+        recyclerView.addItemDecoration(new VerticalSpaceItemDecorator(20));
+
+        recyclerView.setAdapter(adapter);
+
+        recyclerView.setAdapter(adapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
+
+        adapter = new MessagesAdaptor();
+        populateRecyclerViewValues(sender, body);
 
 
         return v;
 
     }
 
+    public void populateRecyclerViewValues(String sender, String body) {
+
+        ArrayList<Messages> listContentArr = new ArrayList<>();
+
+        //Creating POJO class object
+        Messages messages = new Messages();
+        //Values are binded using set method of the POJO class
+        messages.setUserName(sender);
+        messages.setContent(body);
+        //After setting the values, we add all the Objects to the array
+        //Hence, listConentArr is a collection of Array of POJO objects
+
+        listContentArr.add(messages);
+
+        //We set the array to the adapter
+        adapter.setListContent(listContentArr);
+        //We in turn set the adapter to the RecyclerView
+        recyclerView.setAdapter(adapter);
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
 }

@@ -1,6 +1,5 @@
 package datos1.tec.org.packettec.fragments;
 
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,6 +25,8 @@ public class ConvoFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String body;
+    private String sender;
 
 
     public ConvoFragment() {
@@ -56,11 +57,13 @@ public class ConvoFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            String body = "";
+            String sender = "";
         }
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState,String body,String sender) {
+                             Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_convo, container, false);
 
@@ -103,20 +106,20 @@ public class ConvoFragment extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
-
-}
-
-class VerticalSpaceItemDecorator extends RecyclerView.ItemDecoration {
-
-    private final int spacer;
-
-    public VerticalSpaceItemDecorator(int spacer) {
-        this.spacer = spacer;
+    public String getBody() {
+        return body;
     }
 
-    @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        super.getItemOffsets(outRect, view, parent, state);
-        outRect.bottom = spacer;
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 }
+
